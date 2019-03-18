@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * Array based storage for Resumes
@@ -6,15 +7,22 @@ import java.util.*;
 public class ArrayStorage {
     private static final int DEFAULT_LENGTH = 10000;
     private Resume[] storage = new Resume[DEFAULT_LENGTH];
-    private int lastId = 0;
 
     void clear() {
 		Arrays.fill(this.storage, null);
     }
 
     void save(Resume r) {
-    this.storage[lastId]= r;
-    lastId++;
+        if (r == null || r.uuid == null || r.uuid.isEmpty()){
+            return;
+        }
+
+        for (int i = 0; i < this.storage.length ; i++) {
+            if (this.storage[i] == null) {
+                this.storage[i] = r;
+                break;
+            }
+        }
     }
 
     Resume get(String uuid) {
@@ -22,7 +30,12 @@ public class ArrayStorage {
     }
 
     void delete(String uuid) {
-        this.storage = Arrays.stream(this.storage).filter(Objects::nonNull).filter(resume -> !(resume.uuid.equals(uuid))).toArray(Resume[]::new);
+        for (int i = 0; i <this.storage.length ; i++) {
+            if (this.storage[i]!=null && uuid.equals(this.storage[i].uuid)){
+                this.storage[i] = null;
+                break;
+            }
+        }
     }
 
     /**
@@ -33,6 +46,6 @@ public class ArrayStorage {
     }
 
     int size() {
-       return this.storage.length;
+       return (int) Arrays.stream(this.storage).filter(Objects::nonNull).count();
     }
 }
