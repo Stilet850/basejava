@@ -1,5 +1,4 @@
 import java.util.*;
-import java.util.stream.Stream;
 
 /**
  * Array based storage for Resumes
@@ -45,6 +44,10 @@ public class ArrayStorage {
         return Arrays.stream(this.storage).filter(Objects::nonNull).toArray(Resume[]::new);
     }
 
+    /**
+     *
+     * @return size of array (nonNull) containing Resumes.
+     */
     int size() {
         return (int) Arrays.stream(this.storage).filter(Objects::nonNull).count();
     }
