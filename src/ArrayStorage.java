@@ -9,15 +9,15 @@ public class ArrayStorage {
     private Resume[] storage = new Resume[DEFAULT_LENGTH];
 
     void clear() {
-		Arrays.fill(this.storage, null);
+        Arrays.fill(this.storage, null);
     }
 
     void save(Resume r) {
-        if (r == null || r.uuid == null || r.uuid.isEmpty()){
+        if (r == null || r.uuid == null || r.uuid.isEmpty()) {
             return;
         }
 
-        for (int i = 0; i < this.storage.length ; i++) {
+        for (int i = 0; i < this.storage.length; i++) {
             if (this.storage[i] == null) {
                 this.storage[i] = r;
                 break;
@@ -26,12 +26,12 @@ public class ArrayStorage {
     }
 
     Resume get(String uuid) {
-          return Arrays.stream(this.storage).filter(Objects::nonNull).filter(resume -> resume.uuid.equals(uuid)).findFirst().orElse(new Resume());
+        return Arrays.stream(this.storage).filter(Objects::nonNull).filter(resume -> resume.uuid.equals(uuid)).findFirst().orElse(new Resume());
     }
 
     void delete(String uuid) {
-        for (int i = 0; i <this.storage.length ; i++) {
-            if (this.storage[i]!=null && uuid.equals(this.storage[i].uuid)){
+        for (int i = 0; i < this.storage.length; i++) {
+            if (this.storage[i] != null && uuid.equals(this.storage[i].uuid)) {
                 this.storage[i] = null;
                 break;
             }
@@ -46,6 +46,6 @@ public class ArrayStorage {
     }
 
     int size() {
-       return (int) Arrays.stream(this.storage).filter(Objects::nonNull).count();
+        return (int) Arrays.stream(this.storage).filter(Objects::nonNull).count();
     }
 }
