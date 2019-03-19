@@ -1,4 +1,5 @@
-import java.util.*;
+import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * Array based storage for Resumes
@@ -31,8 +32,8 @@ public class ArrayStorage {
     void delete(String uuid) {
         for (int i = 0; i < this.storage.length; i++) {
             if (this.storage[i] != null && uuid.equals(this.storage[i].uuid)) {
-                this.storage[i] = null;
-                break;
+                this.storage[i] = this.storage[size() - 1];
+                this.storage[size() - 1] = null;
             }
         }
     }
@@ -45,7 +46,6 @@ public class ArrayStorage {
     }
 
     /**
-     *
      * @return size of array (nonNull) containing Resumes.
      */
     int size() {
