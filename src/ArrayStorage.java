@@ -10,7 +10,7 @@ public class ArrayStorage {
     private int size;
 
     void clear() {
-        Arrays.fill(this.storage, null);
+        Arrays.fill(storage, null);
         size = 0;
     }
 
@@ -24,7 +24,7 @@ public class ArrayStorage {
     }
 
     Resume get(String uuid) {
-        return Arrays.stream(this.storage).filter(Objects::nonNull).filter(resume -> resume.uuid.equals(uuid)).findFirst().orElse(new Resume());
+        return Arrays.stream(storage).filter(Objects::nonNull).filter(resume -> resume.uuid.equals(uuid)).findFirst().orElse(new Resume());
     }
 
     void delete(String uuid) {
@@ -41,13 +41,13 @@ public class ArrayStorage {
      * @return array, contains only Resumes in storage (without null)
      */
     Resume[] getAll() {
-        return Arrays.stream(this.storage).filter(Objects::nonNull).toArray(Resume[]::new);
+        return Arrays.stream(storage).filter(Objects::nonNull).toArray(Resume[]::new);
     }
 
     /**
      * @return size of array (nonNull) containing Resumes.
      */
     int size() {
-        return this.size;
+        return size;
     }
 }
