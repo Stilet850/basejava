@@ -10,29 +10,31 @@ public class ArrayStorage {
     private int size;
 
     void clear() {
-        Arrays.fill(storage, null);
+        for (int i = 0; i < size; i++)
+            storage[i] = null;
+
         size = 0;
     }
 
     void save(Resume r) {
-        if (r == null || r.uuid == null || r.uuid.isEmpty()) {
+        if (r == null || r.uuid == null || r.uuid.isEmpty())
             return;
-        }
 
         storage[size] = r;
         size++;
     }
 
     Resume get(String uuid) {
-        return Arrays.stream(storage).filter(Objects::nonNull).filter(resume -> resume.uuid.equals(uuid)).findFirst().orElse(new Resume());
+        return Arrays.stream(storage).filter(Objects::nonNull).filter(resume -> resume.uuid.equals(uuid)).findFirst().orElse(null);
     }
 
     void delete(String uuid) {
         for (int i = 0; i < size; i++) {
             if (uuid.equals(storage[i].uuid)) {
-                storage[i] = storage[size() - 1];
-                storage[size() - 1] = null;
+                storage[i] = storage[size - 1];
+                storage[size - 1] = null;
                 size--;
+                break;
             }
         }
     }
