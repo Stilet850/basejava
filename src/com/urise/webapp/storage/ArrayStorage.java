@@ -21,8 +21,10 @@ public class ArrayStorage {
     }
 
     public void update(Resume r){
-        if (checkExistence(r.getUuid())){
-            //TODO: not clear what should be implemented
+        if(getIndex(r.getUuid())==-1) {
+            System.err.println("Resume doesn't exist, uuid : " + r.getUuid());
+        }else{
+            storage[size] = r;
         }
     }
 
@@ -30,38 +32,44 @@ public class ArrayStorage {
         if (r.getUuid() == null || r.getUuid().isEmpty())
            System.err.println("Invalid UUID " + r.getUuid());
 
-        if(!checkExistence(r.getUuid())) {
+        if (size == DEFAULT_LENGTH)
+            System.err.println("Storage is full");
+
+        if(getIndex(r.getUuid())!=-1) {
+            System.err.println("Resume already exists, uuid : " + r.getUuid());
+        }else{
             storage[size] = r;
             size++;
         }
-
-        if (size == DEFAULT_LENGTH)
-            System.err.println("Storage is full");
     }
 
     public Resume get(String uuid) {
-        if(checkExistence(uuid))
-            return Arrays.stream(storage).filter(Objects::nonNull).filter(resume -> resume.getUuid().equals(uuid)).findFirst().orElse(null);
-        else
+        if(getIndex(uuid) == -1){
+            System.err.println("There is no Resume in storage, uuid : " + uuid);
             return null;
-    }
-
-    public void delete(String uuid) {
-        for (int i = 0; i < size; i++) {
-            if (uuid.equals(storage[i].getUuid())) {
-                storage[i] = storage[size - 1];
-                storage[size - 1] = null;
-                size--;
-                break;
-              }
+        }else{
+            return storage[getIndex(uuid)];
         }
     }
 
+    public void delete(String uuid) {
+         if (getIndex(uuid) == -1){
+             System.err.println("There is no Resume in storage, uuid : " + uuid);
+         }else{
+             storage[getIndex(uuid)] = storage[size - 1];
+             storage[size - 1] = null;
+             size--;
+         }
+    }
     /**
      * @return array, contains only Resumes in storage (without null)
      */
     public Resume[] getAll() {
-        return Arrays.stream(storage).filter(Objects::nonNull).toArray(Resume[]::new);
+        Resume [] resume = new Resume[size];
+        for (int i = 0; i < size ; i++) {
+            resume[i] = storage[i];
+        }
+        return resume;
     }
 
     /**
@@ -72,19 +80,16 @@ public class ArrayStorage {
     }
 
     /**
-     * Check if input UUID is unique.
+     * Returns a position of Resume in Storage by Uuid.
      *
-     * @param uuid  String
-     * @return      boolean
+     * @param uuid
+     * @return
      */
-    private boolean checkExistence(String uuid) {
-        if(Arrays.stream(getAll()).anyMatch(resume -> resume.getUuid().equals(uuid))){
-            System.out.println("Resume exists, uuid: " + uuid);
-            return true;
-        }
+    private int getIndex(String uuid){
+            for (int i = 0; i < size; i++)
+                if (uuid.equals(storage[i].getUuid()))
+                  return i;
 
-        System.out.println("Resume doesn't exist, uuid: " + uuid);
-
-        return false;
+                return -1;
     }
 }
