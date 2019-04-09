@@ -8,10 +8,7 @@ import static java.util.Arrays.fill;
 /**
  * Array based storage for Resumes
  */
-public class ArrayStorage implements Storage {
-    private static final int STORAGE_LIMIT = 10000;
-    private final Resume[] storage = new Resume[STORAGE_LIMIT];
-    private int size;
+public class ArrayStorage extends AbstractArrayStorage implements Storage {
 
     public void clear() {
         fill(storage, 0, size, null);
@@ -42,15 +39,6 @@ public class ArrayStorage implements Storage {
         }
     }
 
-    public Resume get(String uuid) {
-        if (getIndex(uuid) == -1) {
-            System.err.println("There is no Resume in storage, uuid : " + uuid);
-            return null;
-        } else {
-            return storage[getIndex(uuid)];
-        }
-    }
-
     public void delete(String uuid) {
         if (getIndex(uuid) == -1) {
             System.err.println("There is no Resume in storage, uuid : " + uuid);
@@ -69,19 +57,12 @@ public class ArrayStorage implements Storage {
     }
 
     /**
-     * @return size of array (nonNull) containing Resumes.
-     */
-    public int size() {
-        return size;
-    }
-
-    /**
      * Returns a position of Resume in Storage by Uuid.
      *
      * @param uuid
      * @return
      */
-    private int getIndex(String uuid) {
+    protected int getIndex(String uuid) {
         for (int i = 0; i < size; i++)
             if (uuid.equals(storage[i].getUuid()))
                 return i;
