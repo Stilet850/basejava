@@ -8,9 +8,9 @@ import static java.util.Arrays.fill;
 /**
  * Array based storage for Resumes
  */
-public class ArrayStorage {
-    private static final int DEFAULT_LENGTH = 10000;
-    private final Resume[] storage = new Resume[DEFAULT_LENGTH];
+public class ArrayStorage implements Storage {
+    private static final int STORAGE_LIMIT = 10000;
+    private final Resume[] storage = new Resume[STORAGE_LIMIT];
     private int size;
 
     public void clear() {
@@ -31,7 +31,7 @@ public class ArrayStorage {
         if (r.getUuid() == null || r.getUuid().isEmpty())
             System.err.println("Invalid UUID " + r.getUuid());
 
-        if (size == DEFAULT_LENGTH)
+        if (size == STORAGE_LIMIT)
             System.err.println("Storage is full");
 
         if (getIndex(r.getUuid()) != -1) {
