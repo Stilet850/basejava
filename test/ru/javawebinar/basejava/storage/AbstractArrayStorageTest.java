@@ -83,19 +83,19 @@ public abstract class AbstractArrayStorageTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void saveNull1() {
+    public void saveNullInUuid() {
         Resume resume = new Resume(null);
         storage.save(resume);
     }
 
     @Test(expected = NullPointerException.class)
-    public void saveNull2() {
+    public void saveEmptyUuid() {
         Resume resume = new Resume("");
         storage.save(resume);
     }
 
     @Test(expected = ExistStorageException.class)
-    public void saveExist() {
+    public void saveExisting() {
         storage.save(RESUME_UUID2);
     }
 
