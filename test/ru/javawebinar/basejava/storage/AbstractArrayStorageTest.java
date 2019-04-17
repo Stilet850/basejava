@@ -8,6 +8,7 @@ import ru.javawebinar.basejava.exception.StorageException;
 import ru.javawebinar.basejava.model.Resume;
 
 import static org.junit.Assert.*;
+import static ru.javawebinar.basejava.storage.AbstractArrayStorage.STORAGE_LIMIT;
 
 public abstract class AbstractArrayStorageTest {
 
@@ -56,7 +57,7 @@ public abstract class AbstractArrayStorageTest {
         assertEquals(storage.get("uuid2"), resumeUUID4);
     }
 
-    @Test (expected = NotExistStorageException.class)
+    @Test(expected = NotExistStorageException.class)
     public void updateNotExist() {
         storage.update(new Resume("uuidToUpdateStorage"));
     }
@@ -100,20 +101,20 @@ public abstract class AbstractArrayStorageTest {
     }
 
     @Test(expected = StorageException.class)
-    public void saveStorageOverFlow(){
-        for (int i = 4; i <= AbstractArrayStorage.STORAGE_LIMIT + 1; i++) {
+    public void saveStorageOverFlow() {
+        for (int i = 4; i <= STORAGE_LIMIT + 1; i++) {
             storage.save(new Resume(Integer.toString(i)));
         }
     }
 
-    @Test (expected = NotExistStorageException.class)
+    @Test(expected = NotExistStorageException.class)
     public void delete() {
         //when
         storage.delete(UUID1);
 
         //then
         assertNotNull(storage.getAll());
-        assertEquals(2,storage.getAll().length);
+        assertEquals(2, storage.getAll().length);
         storage.get(UUID1);
     }
 
