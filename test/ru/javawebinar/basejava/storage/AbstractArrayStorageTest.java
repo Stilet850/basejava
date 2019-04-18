@@ -74,7 +74,7 @@ public abstract class AbstractArrayStorageTest {
         storage.save(RESUME_NOT_EXIST);
 
         assertEquals(4, storage.size());
-        assertEquals(RESUME_NOT_EXIST, storage.getAll()[3]);
+        assertEquals(RESUME_NOT_EXIST, storage.get(UUID_NOT_EXIST));
     }
 
     @Test(expected = NullPointerException.class)
