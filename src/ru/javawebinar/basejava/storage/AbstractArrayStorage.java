@@ -45,7 +45,7 @@ public abstract class AbstractArrayStorage implements Storage {
             throw new StorageException("Storage overflow", r.getUuid());
 
         int index = getIndex(r.getUuid());
-        if (index > 0) {
+        if (index >= 0) {
             throw new ExistStorageException(r.getUuid());
         } else {
             insert(r, index);
@@ -66,7 +66,6 @@ public abstract class AbstractArrayStorage implements Storage {
 
     public void clear() {
         Arrays.fill(storage, 0, size, null);
-
         size = 0;
     }
 
