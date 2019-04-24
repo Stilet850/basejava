@@ -16,14 +16,14 @@ public class SortedArrayStorage extends AbstractArrayStorage {
     }
 
     @Override
-    protected void insert(Resume r, int index) {
-        int insertIdx = -index - 1;
+    protected void insert(Resume r, int key) {
+        int insertIdx = -((Integer)key) - 1;
         arraycopy(storage, insertIdx, storage, insertIdx + 1, size - insertIdx);
         storage[insertIdx] = r;
     }
 
     @Override
-    protected int getIndex(String uuid) {
+    protected int getKey(String uuid) {
         return binarySearch(storage, 0, size, new Resume(uuid));
     }
 }

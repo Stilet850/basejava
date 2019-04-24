@@ -13,11 +13,11 @@ public class ArrayStorage extends AbstractArrayStorage {
     }
 
     @Override
-    protected void insert(Resume r, int index) {
+    protected void insert(Resume r, int key) {
         storage[size] = r;
     }
 
-    protected int getIndex(String uuid) {
+    protected int getKey(String uuid) {
         for (int i = 0; i < size; i++)
             if (uuid.equals(storage[i].getUuid()))
                 return i;

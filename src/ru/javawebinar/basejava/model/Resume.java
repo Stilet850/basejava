@@ -3,6 +3,8 @@ package ru.javawebinar.basejava.model;
 import java.util.Objects;
 import java.util.UUID;
 
+import static java.util.Objects.hash;
+
 /**
  * Initial resume class
  */
@@ -33,7 +35,7 @@ public class Resume implements Comparable<Resume>{
 
     @Override
     public int hashCode() {
-        return Objects.hash(uuid);
+        return hash(uuid);
     }
 
     @Override
