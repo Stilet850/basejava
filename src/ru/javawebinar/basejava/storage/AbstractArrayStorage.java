@@ -5,29 +5,29 @@ import ru.javawebinar.basejava.model.Resume;
 
 import java.util.Arrays;
 
-public abstract class AbstractArrayStorage extends AbstractStorage{
+public abstract class AbstractArrayStorage extends AbstractStorage {
     static final int STORAGE_LIMIT = 10000;
     final Resume[] storage = new Resume[STORAGE_LIMIT];
     int size;
 
     @Override
-    public Resume doGet(int key){
+    public Resume doGet(int key) {
         return storage[(Integer) key];
     }
 
     @Override
-    public void doDelete(int key){
+    public void doDelete(int key) {
         remove((Integer) key);
         size--;
     }
 
     @Override
-    public void doUpdate(Resume r, int key){
+    public void doUpdate(Resume r, int key) {
         storage[(Integer) key] = r;
     }
 
     @Override
-    public void doSave(Resume r, int key){
+    public void doSave(Resume r, int key) {
         if (size == STORAGE_LIMIT)
             throw new StorageException("Storage overflow", r.getUuid());
         else {
@@ -36,14 +36,6 @@ public abstract class AbstractArrayStorage extends AbstractStorage{
         }
     }
 
-
-    public boolean exists(String uuid){
-        if(getKey(uuid)>=0)
-            return true;
-        else
-            return false;
-
-    }
     /**
      * @return array, contains only Resumes in storage (without null)
      */
@@ -64,5 +56,6 @@ public abstract class AbstractArrayStorage extends AbstractStorage{
     }
 
     protected abstract void insert(Resume r, int key);
+
     protected abstract void remove(int index);
 }

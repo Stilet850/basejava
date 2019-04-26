@@ -17,7 +17,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
     protected void insert(Resume r, int key) {
-        int insertIdx = -((Integer)key) - 1;
+        int insertIdx = -((Integer) key) - 1;
         arraycopy(storage, insertIdx, storage, insertIdx + 1, size - insertIdx);
         storage[insertIdx] = r;
     }

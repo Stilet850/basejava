@@ -8,7 +8,7 @@ import ru.javawebinar.basejava.storage.Storage;
 /**
  * Test for your ArrayStorage implementation
  */
-class MainTestArrayStorage {
+class MainTestListStorage {
     private static final Storage ARRAY_STORAGE = new ArrayStorage();
 
     public static void main(String[] args) {
@@ -28,6 +28,7 @@ class MainTestArrayStorage {
         } catch (NotExistStorageException e) {
             System.out.println("Get dummy: NOT exist");
         }
+
         printAll();
         ARRAY_STORAGE.delete(r1.getUuid());
         printAll();
