@@ -10,7 +10,7 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     protected void doUpdate(Resume r, int key) {
-        storage.set(getKey(r.getUuid()), r);
+        storage.set(key, r);
     }
 
     @Override
