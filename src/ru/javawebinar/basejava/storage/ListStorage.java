@@ -9,27 +9,35 @@ public class ListStorage extends AbstractStorage {
     List<Resume> storage = new ArrayList<Resume>();
 
     @Override
-    protected void doUpdate(Resume r, int key) {
-        storage.set(key, r);
+    protected boolean has(Object key) {
+        if ((int) key > -1)
+            return true;
+
+        return false;
     }
 
     @Override
-    protected void doSave(Resume r, int key) {
+    protected void doUpdate(Resume r, Object key) {
+        storage.set((Integer) key, r);
+    }
+
+    @Override
+    protected void doSave(Resume r, Object key) {
         storage.add(r);
     }
 
     @Override
-    protected void doDelete(int key) {
-        storage.remove(key);
+    protected void doDelete(Object key) {
+        storage.remove((int) key);
     }
 
     @Override
-    protected Resume doGet(int key) {
-        return storage.get(key);
+    protected Resume doGet(Object key) {
+        return storage.get((int) key);
     }
 
     @Override
-    protected int getKey(String uuid) {
+    protected Object getKey(String uuid) {
         for (int i = 0; i < storage.size(); i++)
             if (uuid.equals(storage.get(i).getUuid()))
                 return i;

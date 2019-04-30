@@ -11,27 +11,35 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     int size;
 
     @Override
-    public Resume doGet(int key) {
+    public boolean has(Object key){
+        if ((Integer) key > -1)
+            return true;
+
+        return false;
+    }
+
+    @Override
+    public Resume doGet(Object key) {
         return storage[(Integer) key];
     }
 
     @Override
-    public void doDelete(int key) {
+    public void doDelete(Object key) {
         remove((Integer) key);
         size--;
     }
 
     @Override
-    public void doUpdate(Resume r, int key) {
+    public void doUpdate(Resume r, Object key) {
         storage[(Integer) key] = r;
     }
 
     @Override
-    public void doSave(Resume r, int key) {
+    public void doSave(Resume r, Object key) {
         if (size == STORAGE_LIMIT)
             throw new StorageException("Storage overflow", r.getUuid());
         else {
-            insert(r, key);
+            insert(r, (Integer) key);
             size++;
         }
     }

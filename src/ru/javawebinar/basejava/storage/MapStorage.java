@@ -9,42 +9,47 @@ public class MapStorage extends AbstractStorage {
     Map<String, Resume> storage = new TreeMap<String, Resume>();
 
     @Override
-    protected void doUpdate(Resume r, int key) {
-
+    protected boolean has(Object key) {
+        return storage.containsKey((String) key);
     }
 
     @Override
-    protected void doSave(Resume r, int key) {
-
+    protected void doUpdate(Resume r, Object key) {
+        storage.put((String) key, r);
     }
 
     @Override
-    protected void doDelete(int key) {
-
+    protected void doSave(Resume r, Object key) {
+        storage.put((String) key, r);
     }
 
     @Override
-    protected Resume doGet(int key) {
-        return null;
+    protected void doDelete(Object key) {
+        storage.remove((String) key);
     }
 
     @Override
-    protected int getKey(String uuid) {
-        return 0;
+    protected Resume doGet(Object key) {
+        return storage.get((String) key);
+    }
+
+    @Override
+    protected Object getKey(String uuid) {
+        return uuid;
     }
 
     @Override
     public void clear() {
-
+        storage.clear();
     }
 
     @Override
     public Resume[] getAll() {
-        return new Resume[0];
+        return storage.values().stream().toArray(Resume[]::new);
     }
 
     @Override
     public int size() {
-        return 0;
+        return storage.keySet().size();
     }
 }

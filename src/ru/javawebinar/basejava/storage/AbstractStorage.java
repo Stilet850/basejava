@@ -8,8 +8,8 @@ import ru.javawebinar.basejava.model.Resume;
 public abstract class AbstractStorage implements Storage {
 
     public Resume get(String uuid) {
-        int key = getKey(uuid);
-        if (key <= -1) {
+        Object key = getKey(uuid);
+        if (!has(key)) {
             throw new NotExistStorageException(uuid);
         } else {
             return doGet(key);
@@ -17,8 +17,8 @@ public abstract class AbstractStorage implements Storage {
     }
 
     public void update(Resume r) {
-        int key = getKey(r.getUuid());
-        if (key <= -1) {
+        Object key = getKey(r.getUuid());
+        if (!has(key)) {
             throw new NotExistStorageException(r.getUuid());
         } else {
             doUpdate(r, key);
@@ -29,8 +29,8 @@ public abstract class AbstractStorage implements Storage {
         if (r == null || r.getUuid() == null || r.getUuid().isEmpty())
             throw new InvalidResumeException("Invalid resume:" + r, r);
 
-        int key = getKey(r.getUuid());
-        if (key >= 0) {
+        Object key = getKey(r.getUuid());
+        if (has(key)) {
             throw new ExistStorageException(r.getUuid());
         } else {
             doSave(r, key);
@@ -38,21 +38,23 @@ public abstract class AbstractStorage implements Storage {
     }
 
     public void delete(String uuid) {
-        int key = getKey(uuid);
-        if (key <= -1) {
+        Object key = getKey(uuid);
+        if (!has(key)) {
             throw new NotExistStorageException(uuid);
         } else {
             doDelete(key);
         }
     }
 
-    protected abstract void doUpdate(Resume r, int key);
+    protected abstract boolean has(Object key);
 
-    protected abstract void doSave(Resume r, int key);
+    protected abstract void doUpdate(Resume r, Object key);
 
-    protected abstract void doDelete(int key);
+    protected abstract void doSave(Resume r, Object key);
 
-    protected abstract Resume doGet(int key);
+    protected abstract void doDelete(Object key);
 
-    protected abstract int getKey(String uuid);
+    protected abstract Resume doGet(Object key);
+
+    protected abstract Object getKey(String uuid);
 }
