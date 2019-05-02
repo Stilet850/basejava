@@ -15,7 +15,7 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     protected void doUpdate(Resume r, Object key) {
-        storage.set((Integer) key, r);
+        storage.set((int) key, r);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     public Resume[] getAll() {
-        return storage.stream().toArray(Resume[]::new);
+        return storage.toArray(new Resume[size()]);
     }
 
     @Override
