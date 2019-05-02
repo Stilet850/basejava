@@ -11,27 +11,24 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     int size;
 
     @Override
-    public boolean has(Object key){
-        if ((Integer) key > -1)
-            return true;
-
-        return false;
+    public boolean hasKey(Object key) {
+        return ((int) key > -1);
     }
 
     @Override
     public Resume doGet(Object key) {
-        return storage[(Integer) key];
+        return storage[(int) key];
     }
 
     @Override
     public void doDelete(Object key) {
-        remove((Integer) key);
+        remove((int) key);
         size--;
     }
 
     @Override
     public void doUpdate(Resume r, Object key) {
-        storage[(Integer) key] = r;
+        storage[(int) key] = r;
     }
 
     @Override

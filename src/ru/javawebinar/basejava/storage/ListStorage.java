@@ -9,11 +9,8 @@ public class ListStorage extends AbstractStorage {
     List<Resume> storage = new ArrayList<Resume>();
 
     @Override
-    protected boolean has(Object key) {
-        if ((int) key > -1)
-            return true;
-
-        return false;
+    protected boolean hasKey(Object key) {
+        return ((int) key > -1);
     }
 
     @Override

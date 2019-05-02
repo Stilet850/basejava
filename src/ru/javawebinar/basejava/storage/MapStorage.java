@@ -9,7 +9,7 @@ public class MapStorage extends AbstractStorage {
     Map<String, Resume> storage = new TreeMap<String, Resume>();
 
     @Override
-    protected boolean has(Object key) {
+    protected boolean hasKey(Object key) {
         return storage.containsKey((String) key);
     }
 
@@ -45,11 +45,11 @@ public class MapStorage extends AbstractStorage {
 
     @Override
     public Resume[] getAll() {
-        return storage.values().stream().toArray(Resume[]::new);
+        return storage.values().toArray(new Resume[size()]);
     }
 
     @Override
     public int size() {
-        return storage.keySet().size();
+        return storage.size();
     }
 }

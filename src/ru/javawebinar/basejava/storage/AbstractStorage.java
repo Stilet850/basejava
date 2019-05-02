@@ -9,7 +9,7 @@ public abstract class AbstractStorage implements Storage {
 
     public Resume get(String uuid) {
         Object key = getKey(uuid);
-        if (!has(key)) {
+        if (!hasKey(key)) {
             throw new NotExistStorageException(uuid);
         } else {
             return doGet(key);
@@ -18,7 +18,7 @@ public abstract class AbstractStorage implements Storage {
 
     public void update(Resume r) {
         Object key = getKey(r.getUuid());
-        if (!has(key)) {
+        if (!hasKey(key)) {
             throw new NotExistStorageException(r.getUuid());
         } else {
             doUpdate(r, key);
@@ -30,7 +30,7 @@ public abstract class AbstractStorage implements Storage {
             throw new InvalidResumeException("Invalid resume:" + r, r);
 
         Object key = getKey(r.getUuid());
-        if (has(key)) {
+        if (hasKey(key)) {
             throw new ExistStorageException(r.getUuid());
         } else {
             doSave(r, key);
@@ -39,14 +39,14 @@ public abstract class AbstractStorage implements Storage {
 
     public void delete(String uuid) {
         Object key = getKey(uuid);
-        if (!has(key)) {
+        if (!hasKey(key)) {
             throw new NotExistStorageException(uuid);
         } else {
             doDelete(key);
         }
     }
 
-    protected abstract boolean has(Object key);
+    protected abstract boolean hasKey(Object key);
 
     protected abstract void doUpdate(Resume r, Object key);
 
