@@ -15,7 +15,7 @@ public class MainCollection {
     private static Resume RESUME_UUID3;
     private static final Resume RESUME_NOT_EXIST;
 
-    static{
+    static {
         RESUME_UUID1 = new Resume(UUID1);
         RESUME_UUID2 = new Resume(UUID2);
         RESUME_UUID3 = new Resume(UUID3);
@@ -41,24 +41,24 @@ public class MainCollection {
 
         Iterator<Resume> iterator = collection.iterator();
 
-        while(iterator.hasNext()){
+        while (iterator.hasNext()) {
             Resume resume = iterator.next();
-            if(resume.getUuid().equals(UUID1))
-                         iterator.remove();
+            if (resume.getUuid().equals(UUID1))
+                iterator.remove();
         }
 
-               System.out.println(collection.toString());
+        System.out.println(collection.toString());
 
         Map<String, Resume> map = new HashMap<>();
         map.put(UUID1, RESUME_UUID1);
         map.put(UUID2, RESUME_UUID2);
         map.put(UUID3, RESUME_UUID3);
 
-        for (String uuid: map.keySet()) {
-            System.out.println(map.get(uuid ));
+        for (String uuid : map.keySet()) {
+            System.out.println(map.get(uuid));
         }
 
-        for (Map.Entry<String, Resume> entry:map.entrySet()){
+        for (Map.Entry<String, Resume> entry : map.entrySet()) {
             System.out.println(entry.getValue());
         }
     }
