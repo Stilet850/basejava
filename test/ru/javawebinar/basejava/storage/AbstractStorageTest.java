@@ -64,7 +64,7 @@ public abstract class AbstractStorageTest {
     }
 
     @Test
-    public void getAll() {
+    public void getAllSorted() {
         List<Resume> expectedArray = Arrays.asList(RESUME_UUID1, RESUME_UUID2, RESUME_UUID3);
         List<Resume> actualArray = storage.getAllSorted();
         assertNotNull(actualArray);
