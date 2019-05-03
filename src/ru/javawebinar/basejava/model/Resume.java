@@ -8,7 +8,7 @@ import static java.util.Objects.hash;
 /**
  * Initial resume class
  */
-public class Resume implements Comparable<Resume>{
+public class Resume implements Comparable<Resume> {
 //public class Resume{
 
     // Unique identifier
@@ -58,6 +58,6 @@ public class Resume implements Comparable<Resume>{
     public int compareTo(Resume r) {
         int byFullName = this.fullName.compareTo(r.fullName);
 
-        return byFullName !=0 ? byFullName : this.uuid.compareTo(r.uuid);
+        return byFullName != 0 ? byFullName : this.uuid.compareTo(r.uuid);
     }
 }

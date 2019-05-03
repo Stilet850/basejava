@@ -5,6 +5,11 @@ import ru.javawebinar.basejava.exception.InvalidResumeException;
 import ru.javawebinar.basejava.exception.NotExistStorageException;
 import ru.javawebinar.basejava.model.Resume;
 
+import java.util.List;
+
+import static java.util.Arrays.asList;
+import static java.util.Collections.sort;
+
 public abstract class AbstractStorage implements Storage {
 
     public Resume get(String uuid) {
@@ -46,6 +51,15 @@ public abstract class AbstractStorage implements Storage {
         }
     }
 
+    @Override
+    public List<Resume> getAllSorted() {
+        List<Resume> resumes = asList(getAll());
+        sort(resumes);
+        return resumes;
+    }
+
+    protected abstract Resume[] getAll();
+
     protected abstract boolean hasKey(Object key);
 
     protected abstract void doUpdate(Resume r, Object key);
@@ -57,4 +71,6 @@ public abstract class AbstractStorage implements Storage {
     protected abstract Resume doGet(Object key);
 
     protected abstract Object getKey(String uuid);
+
+
 }
