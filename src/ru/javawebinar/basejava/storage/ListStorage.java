@@ -5,6 +5,8 @@ import ru.javawebinar.basejava.model.Resume;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Collections.sort;
+
 public class ListStorage extends AbstractStorage {
     List<Resume> storage = new ArrayList<Resume>();
 
@@ -50,6 +52,7 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     public List<Resume> getAllSorted() {
+        sort(storage);
         return storage;
     }
 
