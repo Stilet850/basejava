@@ -16,7 +16,11 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 //        }
 //    }
 
-    private static final Comparator<Resume> RESUME_COMPARATOR = (o1, o2) -> o1.getUuid().compareTo(o2.getUuid());
+    private static final Comparator<Resume> RESUME_COMPARATOR = SortedArrayStorage::compare;
+
+    private static int compare(Resume o1, Resume o2) {
+        return o1.getUuid().compareTo(o2.getUuid());
+    }
 
     @Override
     protected void remove(int index) {
@@ -26,7 +30,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
     protected void insert(Resume resume, int key) {
-        int insertIdx = -((Integer) key) - 1;
+        int insertIdx = -key - 1;
         arraycopy(storage, insertIdx, storage, insertIdx + 1, size - insertIdx);
         storage[insertIdx] = resume;
     }

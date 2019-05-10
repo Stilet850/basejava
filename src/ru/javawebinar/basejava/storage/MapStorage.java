@@ -2,12 +2,14 @@ package ru.javawebinar.basejava.storage;
 
 import ru.javawebinar.basejava.model.Resume;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 //TODO use another new class as search key.
 public class MapStorage extends AbstractStorage {
-    Map<String, Resume> storage = new TreeMap<String, Resume>();
+    Map<String, Resume> storage = new HashMap<>();
 
     @Override
     protected boolean hasKey(Object key) {
@@ -45,8 +47,8 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    public Resume[] getAll() {
-        return storage.values().toArray(new Resume[size()]);
+    public List getAll() {
+        return storage.values().stream().collect(Collectors.toList());
     }
 
     @Override

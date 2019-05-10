@@ -7,27 +7,18 @@ import ru.javawebinar.basejava.model.Resume;
 
 import java.util.List;
 
-import static java.util.Arrays.asList;
 import static java.util.Collections.sort;
 
 public abstract class AbstractStorage implements Storage {
 
     public Resume get(String uuid) {
-        Object key = getKey(uuid);
-        if (!hasKey(key)) {
-            throw new NotExistStorageException(uuid);
-        } else {
-            return doGet(key);
-        }
+        Object key = getExistingKey(uuid);
+           return doGet(key);
     }
 
     public void update(Resume resume) {
-        Object key = getKey(resume.getUuid());
-        if (!hasKey(key)) {
-            throw new NotExistStorageException(resume.getUuid());
-        } else {
-            doUpdate(resume, key);
-        }
+        Object key = getExistingKey(resume.getUuid());
+        doUpdate(resume, key);
     }
 
     public void save(Resume resume) {
@@ -43,22 +34,27 @@ public abstract class AbstractStorage implements Storage {
     }
 
     public void delete(String uuid) {
-        Object key = getKey(uuid);
-        if (!hasKey(key)) {
-            throw new NotExistStorageException(uuid);
-        } else {
-            doDelete(key);
-        }
+        Object key = getExistingKey(uuid);
+        doDelete(key);
     }
 
     @Override
     public List<Resume> getAllSorted() {
-        List<Resume> resumes = asList(getAll());
+        List<Resume> resumes = getAll();
         sort(resumes);
         return resumes;
     }
 
-    protected abstract Resume[] getAll();
+    private Object getExistingKey(String uuid){
+        Object key = getKey(uuid);
+        if (!hasKey(key)) {
+            throw new NotExistStorageException(uuid);
+        }else{
+            return key;
+        }
+    }
+
+    protected abstract List getAll();
 
     protected abstract boolean hasKey(Object key);
 
