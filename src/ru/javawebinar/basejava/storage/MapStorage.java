@@ -15,13 +15,13 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    protected void doUpdate(Resume r, Object key) {
-        storage.put((String) key, r);
+    protected void doUpdate(Resume resume, Object key) {
+        storage.put((String) key, resume);
     }
 
     @Override
-    protected void doSave(Resume r, Object key) {
-        storage.put((String) key, r);
+    protected void doSave(Resume resume, Object key) {
+        storage.put((String) key, resume);
     }
 
     @Override

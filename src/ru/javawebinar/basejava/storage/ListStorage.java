@@ -14,13 +14,13 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected void doUpdate(Resume r, Object key) {
-        storage.set((int) key, r);
+    protected void doUpdate(Resume resume, Object key) {
+        storage.set((int) key, resume);
     }
 
     @Override
-    protected void doSave(Resume r, Object key) {
-        storage.add(r);
+    protected void doSave(Resume resume, Object key) {
+        storage.add(resume);
     }
 
     @Override

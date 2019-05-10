@@ -21,24 +21,24 @@ public abstract class AbstractStorage implements Storage {
         }
     }
 
-    public void update(Resume r) {
-        Object key = getKey(r.getUuid());
+    public void update(Resume resume) {
+        Object key = getKey(resume.getUuid());
         if (!hasKey(key)) {
-            throw new NotExistStorageException(r.getUuid());
+            throw new NotExistStorageException(resume.getUuid());
         } else {
-            doUpdate(r, key);
+            doUpdate(resume, key);
         }
     }
 
-    public void save(Resume r) {
-        if (r == null || r.getUuid() == null || r.getUuid().isEmpty())
-            throw new InvalidResumeException("Invalid resume:" + r, r);
+    public void save(Resume resume) {
+        if (resume == null || resume.getUuid() == null || resume.getUuid().isEmpty())
+            throw new InvalidResumeException("Invalid resume:" + resume, resume);
 
-        Object key = getKey(r.getUuid());
+        Object key = getKey(resume.getUuid());
         if (hasKey(key)) {
-            throw new ExistStorageException(r.getUuid());
+            throw new ExistStorageException(resume.getUuid());
         } else {
-            doSave(r, key);
+            doSave(resume, key);
         }
     }
 
@@ -62,9 +62,9 @@ public abstract class AbstractStorage implements Storage {
 
     protected abstract boolean hasKey(Object key);
 
-    protected abstract void doUpdate(Resume r, Object key);
+    protected abstract void doUpdate(Resume resume, Object key);
 
-    protected abstract void doSave(Resume r, Object key);
+    protected abstract void doSave(Resume resume, Object key);
 
     protected abstract void doDelete(Object key);
 
