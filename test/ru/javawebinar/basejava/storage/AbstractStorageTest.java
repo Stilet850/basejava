@@ -21,10 +21,10 @@ public abstract class AbstractStorageTest {
     private static final String UUID3 = "uuid3";
     private static final String UUID_NEW = "uuid_new";
 
-    private static final Resume RESUME_UUID1 = new Resume(UUID1, UUID1);
-    private static final Resume RESUME_UUID2 = new Resume(UUID2, UUID2);
-    private static final Resume RESUME_UUID3 = new Resume(UUID3, UUID3);
-    protected static final Resume RESUME_NEW = new Resume(UUID_NEW, UUID_NEW);
+    private static Resume RESUME_UUID1;
+    private static Resume RESUME_UUID2;
+    private static Resume RESUME_UUID3;
+    static Resume RESUME_NEW;
 
     protected AbstractStorageTest(Storage storage) {
         this.storage = storage;
@@ -32,6 +32,10 @@ public abstract class AbstractStorageTest {
 
     @Before
     public void setUp() {
+        RESUME_UUID1 = new Resume(UUID1, UUID1);
+        RESUME_UUID2 = new Resume(UUID2, UUID2);
+        RESUME_UUID3 = new Resume(UUID3, UUID3);
+        RESUME_NEW = new Resume(UUID_NEW, UUID_NEW);
         storage.clear();
         storage.save(RESUME_UUID3);
         storage.save(RESUME_UUID2);
@@ -57,12 +61,11 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void update() {
-        Resume resume = RESUME_UUID2;
-        String updated_full_name = "UPDATED_NAME";
-        resume.setFullName(updated_full_name);
+        Resume resume = new Resume(UUID2, UUID_NEW);
+
         storage.update(resume);
         assertSame(resume, storage.get(UUID2));
-        assertEquals(updated_full_name, storage.get(UUID2).getFullName());
+        assertEquals(UUID_NEW, storage.get(UUID2).getFullName());
     }
 
     @Test(expected = NotExistStorageException.class)

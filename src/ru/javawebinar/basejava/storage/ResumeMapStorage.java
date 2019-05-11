@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 //TODO use another new class as search key.
-public class MapStorage extends AbstractStorage {
+public class ResumeMapStorage extends AbstractStorage {
     Map<String, Resume> storage = new HashMap<>();
 
     @Override
