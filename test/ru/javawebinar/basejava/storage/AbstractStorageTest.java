@@ -15,7 +15,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 public abstract class AbstractStorageTest {
-    protected Storage storage;
+    protected final Storage storage;
     private static final String UUID1 = "uuid1";
     private static final String UUID2 = "uuid2";
     private static final String UUID3 = "uuid3";

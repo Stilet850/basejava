@@ -13,7 +13,7 @@ public abstract class AbstractStorage implements Storage {
 
     public Resume get(String uuid) {
         Object key = getExistingKey(uuid);
-           return doGet(key);
+        return doGet(key);
     }
 
     public void update(Resume resume) {
@@ -22,16 +22,11 @@ public abstract class AbstractStorage implements Storage {
     }
 
     public void save(Resume resume) {
-        if (resume == null || resume.getUuid() == null || resume.getUuid().isEmpty())
-            throw new InvalidResumeException("Invalid resume:" + resume, resume);
+        validate(resume);
 
-        Object key = getKey(resume.getUuid());
-        if (hasKey(key)) {
-            throw new ExistStorageException(resume.getUuid());
-        } else {
-            doSave(resume, key);
-        }
-    }
+        Object key = getNotExistingKey(resume.getUuid());
+        doSave(resume, key);
+   }
 
     public void delete(String uuid) {
         Object key = getExistingKey(uuid);
@@ -45,11 +40,25 @@ public abstract class AbstractStorage implements Storage {
         return resumes;
     }
 
-    private Object getExistingKey(String uuid){
+    private static void validate(Resume resume) {
+        if (resume == null || resume.getUuid() == null || resume.getUuid().isEmpty())
+            throw new InvalidResumeException("Invalid resume:" + resume, resume);
+    }
+
+    private Object getExistingKey(String uuid) {
         Object key = getKey(uuid);
         if (!hasKey(key)) {
             throw new NotExistStorageException(uuid);
-        }else{
+        } else {
+            return key;
+        }
+    }
+
+    private Object getNotExistingKey(String uuid) {
+        Object key = getKey(uuid);
+        if (hasKey(key)) {
+            throw new ExistStorageException(uuid);
+        } else {
             return key;
         }
     }

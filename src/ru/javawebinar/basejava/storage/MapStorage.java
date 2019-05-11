@@ -7,13 +7,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//TODO use another new class as search key.
 public class MapStorage extends AbstractStorage {
-    Map<String, Resume> storage = new HashMap<>();
+    private final Map<String, Resume> storage = new HashMap<>();
 
     @Override
     protected boolean hasKey(Object key) {
-        return storage.containsKey((String) key);
+        return storage.containsKey(key);
     }
 
     @Override
@@ -28,12 +27,12 @@ public class MapStorage extends AbstractStorage {
 
     @Override
     protected void doDelete(Object key) {
-        storage.remove((String) key);
+        storage.remove(key);
     }
 
     @Override
     protected Resume doGet(Object key) {
-        return storage.get((String) key);
+        return storage.get(key);
     }
 
     @Override

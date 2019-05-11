@@ -8,32 +8,32 @@ import java.util.List;
 import java.util.Map;
 
 //TODO use another new class as search key.
-public class ResumeMapStorage extends AbstractStorage {
-    Map<String, Resume> storage = new HashMap<>();
+public class MapResumeStorage extends AbstractStorage {
+    private final Map<String, Resume> storage = new HashMap<>();
 
     @Override
     protected boolean hasKey(Object key) {
-        return storage.containsKey((String) key);
+        return storage.containsKey(key);
     }
 
     @Override
     protected void doUpdate(Resume resume, Object key) {
-        storage.put((String) key, resume);
+        storage.replace(resume.getUuid(), resume);
     }
 
     @Override
     protected void doSave(Resume resume, Object key) {
-        storage.put((String) key, resume);
+        storage.put(resume.getUuid(), resume);
     }
 
     @Override
     protected void doDelete(Object key) {
-        storage.remove((String) key);
+        storage.remove(key);
     }
 
     @Override
     protected Resume doGet(Object key) {
-        return storage.get((String) key);
+        return storage.get(key);
     }
 
     @Override

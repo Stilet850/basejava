@@ -20,8 +20,7 @@ public abstract class AbstractArrayStorageTest extends AbstractStorageTest {
             for (int i = 0; i < STORAGE_LIMIT; i++) {
                 storage.save(new Resume(Integer.toString(i)));
             }
-            int expectedStorageLength = STORAGE_LIMIT;
-            assertEquals(expectedStorageLength, storage.size());
+            assertEquals(STORAGE_LIMIT, storage.size());
         } catch (StorageException e) {
             fail("Storage should not be filled. Please check storage capacity.");
         }
