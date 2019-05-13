@@ -37,7 +37,7 @@ public abstract class AbstractStorage implements Storage {
     public List<Resume> getAllSorted() {
         List<Resume> resumes = getAll();
         //Configure various type of sorts
-        sort(resumes, Resume.SortByFullNameAndUuid);
+        sort(resumes, Resume.sortByFullNameAndUuid);
       //  sort(resumes);
         return resumes;
     }
