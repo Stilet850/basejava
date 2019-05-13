@@ -36,7 +36,9 @@ public abstract class AbstractStorage implements Storage {
     @Override
     public List<Resume> getAllSorted() {
         List<Resume> resumes = getAll();
-        sort(resumes);
+        //Configure various type of sorts
+        sort(resumes, Resume.SortByFullNameAndUuid);
+      //  sort(resumes);
         return resumes;
     }
 
