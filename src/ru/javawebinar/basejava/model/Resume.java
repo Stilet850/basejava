@@ -10,9 +10,9 @@ import static java.util.Objects.hash;
  * Initial resume class
  */
 public class Resume implements Comparable<Resume> {
-    public static Comparator<Resume> sortByFullNameAndUuid = Comparator.comparing((Resume o) -> o.fullName).thenComparing(Resume::getUuid);
-    public static Comparator<Resume> sortByUuid = (o1, o2) -> o1.getUuid().compareTo(o2.getUuid());
-    public static Comparator<Resume> sortByFullName = new Comparator<Resume>() {
+    public static Comparator<Resume> SORT_BY_FULL_NAME_UUID = Comparator.comparing((Resume o) -> o.fullName).thenComparing(Resume::getUuid);
+    public static Comparator<Resume> SORT_BY_UUID = (o1, o2) -> o1.getUuid().compareTo(o2.getUuid());
+    public static Comparator<Resume> SORT_BY_FULL_NAME = new Comparator<Resume>() {
         @Override
         public int compare(Resume o1, Resume o2) {
             return o1.fullName.compareTo(o2.fullName);
