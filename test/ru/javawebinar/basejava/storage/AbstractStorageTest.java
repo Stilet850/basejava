@@ -22,8 +22,8 @@ public abstract class AbstractStorageTest {
     private static final String UUID_NEW = "uuid_new";
 
     private static Resume RESUME_UUID1 = new Resume(UUID1, "abcd");
-    private static Resume RESUME_UUID2 = new Resume(UUID2, "bcd");
-    private static Resume RESUME_UUID3 = new Resume(UUID3, "bbd");
+    private static Resume RESUME_UUID2 = new Resume(UUID2, "bbd");
+    private static Resume RESUME_UUID3 = new Resume(UUID3, "bcd");
     static Resume RESUME_NEW = new Resume(UUID_NEW, UUID_NEW);
 
     protected AbstractStorageTest(Storage storage) {
@@ -71,7 +71,7 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void getAllSorted() {
-        List<Resume> expectedArray = asList(RESUME_UUID1, RESUME_UUID3, RESUME_UUID2 );
+        List<Resume> expectedArray = asList(RESUME_UUID1, RESUME_UUID2, RESUME_UUID3 );
         List<Resume> actualArray = storage.getAllSorted();
         assertNotNull(actualArray);
         assertThat(actualArray, is(expectedArray));
