@@ -4,6 +4,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 import static java.util.Objects.hash;
+import static java.util.Objects.requireNonNull;
 
 /**
  * Initial resume class
@@ -11,7 +12,7 @@ import static java.util.Objects.hash;
 public class Resume implements Comparable<Resume> {
     // Unique identifier
     private final String uuid;
-
+    //TODO: Better to wrap this field into separate Class: FullName
     private final String fullName;
 
     public Resume(String fullName) {
@@ -19,6 +20,10 @@ public class Resume implements Comparable<Resume> {
     }
 
     public Resume(String uuid, String fullName) {
+        //after watching HW#06
+        requireNonNull(uuid, "UUID must not be null");
+        requireNonNull(fullName, "FullName must not be NULL");
+
         this.uuid = uuid;
         this.fullName = fullName;
     }
@@ -49,6 +54,7 @@ public class Resume implements Comparable<Resume> {
     public String toString() {
         return "Resume{" +
                 "uuid='" + uuid + '\'' +
+                ", fullName='" + fullName + '\'' +
                 '}';
     }
 
