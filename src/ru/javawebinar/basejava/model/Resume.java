@@ -18,8 +18,8 @@ public class Resume implements Comparable<Resume> {
     private final String uuid;
     //TODO: Better to wrap this field into separate Class: FullName
     private final String fullName;
-    private Map<ContactType, String> contacts;
-    private Map<SectionType, Section> sections;
+    private Map<ContactType, String> contacts = new HashMap<>();
+    private Map<SectionType, Section> sections = new HashMap<>();
 
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
@@ -32,8 +32,6 @@ public class Resume implements Comparable<Resume> {
 
         this.uuid = uuid;
         this.fullName = fullName;
-        this.contacts = new HashMap<>();
-        this.sections = new HashMap<>();
     }
 
     public void addContact(ContactType contactType, String contact) {
