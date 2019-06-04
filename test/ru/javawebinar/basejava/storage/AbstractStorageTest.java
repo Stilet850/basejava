@@ -71,7 +71,7 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void getAllSorted() {
-        List<Resume> expectedArray = asList(RESUME_UUID1, RESUME_UUID2, RESUME_UUID3 );
+        List<Resume> expectedArray = asList(RESUME_UUID1, RESUME_UUID2, RESUME_UUID3);
         List<Resume> actualArray = storage.getAllSorted();
         assertNotNull(actualArray);
         assertThat(actualArray, is(expectedArray));
@@ -89,7 +89,7 @@ public abstract class AbstractStorageTest {
         storage.save(null);
     }
 
-    @Test(expected = InvalidResumeException.class)
+    @Test(expected = NullPointerException.class)
     public void saveNullInUuid() {
         Resume resume = new Resume(null, UUID1);
         storage.save(resume);

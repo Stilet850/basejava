@@ -7,38 +7,38 @@ import java.util.List;
 
 import static java.util.Arrays.*;
 
-public abstract class AbstractArrayStorage extends AbstractStorage {
+public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
     static final int STORAGE_LIMIT = 10000;
     final Resume[] storage = new Resume[STORAGE_LIMIT];
     int size;
 
     @Override
-    public boolean hasSearchKey(Object index) {
-        return ((int) index > -1);
+    public boolean hasSearchKey(Integer index) {
+        return (index > -1);
     }
 
     @Override
-    public Resume doGet(Object index) {
-        return storage[(int) index];
+    public Resume doGet(Integer index) {
+        return storage[index];
     }
 
     @Override
-    public void doDelete(Object index) {
-        remove((int) index);
+    public void doDelete(Integer index) {
+        remove(index);
         size--;
     }
 
     @Override
-    public void doUpdate(Resume resume, Object index) {
-        storage[(int) index] = resume;
+    public void doUpdate(Resume resume, Integer index) {
+        storage[index] = resume;
     }
 
     @Override
-    public void doSave(Resume resume, Object index) {
+    public void doSave(Resume resume, Integer index) {
         if (size == STORAGE_LIMIT)
             throw new StorageException("Storage overflow", resume.getUuid());
         else {
-            insert(resume, (Integer) index);
+            insert(resume, index);
             size++;
         }
     }
