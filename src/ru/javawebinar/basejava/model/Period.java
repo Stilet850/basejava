@@ -7,6 +7,7 @@ public class Period {
     private LocalDate endDate;
 
     public Period(LocalDate startDate, LocalDate endDate) {
+        //TODO: validation
         this.startDate = startDate;
         this.endDate = endDate;
     }
