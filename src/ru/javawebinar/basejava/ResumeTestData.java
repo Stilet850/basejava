@@ -1,4 +1,4 @@
-package ru.javawebinar.basejava.storage;
+package ru.javawebinar.basejava;
 
 import ru.javawebinar.basejava.model.ContactType;
 import ru.javawebinar.basejava.model.Resume;
@@ -66,5 +66,12 @@ public class ResumeTestData {
 
         Section education = new MultiLineSection(educationList);
         resume.addSection(SectionType.EDUCATION, education);
+
+
+
+
+
+
+
     }
 }

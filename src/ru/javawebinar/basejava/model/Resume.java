@@ -16,10 +16,6 @@ public class Resume implements Comparable<Resume> {
     //TODO: Better to wrap this field into separate Class: FullName
     private final String fullName;
 
-    public void setContacts(Map<ContactType, String> contacts) {
-        this.contacts = contacts;
-    }
-
     private Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
     private Map<SectionType, Section> sections = new EnumMap<>(SectionType.class);
 
@@ -34,6 +30,10 @@ public class Resume implements Comparable<Resume> {
 
         this.uuid = uuid;
         this.fullName = fullName;
+    }
+
+    public void setContacts(Map<ContactType, String> contacts) {
+        this.contacts = contacts;
     }
 
     public void addContact(ContactType contactType, String contact) {
@@ -85,7 +85,6 @@ public class Resume implements Comparable<Resume> {
     @Override
     public int compareTo(Resume r) {
         int comparisonResultByFullName = fullName.compareTo(r.fullName);
-
-        return comparisonResultByFullName != 0 ? comparisonResultByFullName : uuid.compareTo(r.uuid);
+                return comparisonResultByFullName != 0 ? comparisonResultByFullName : uuid.compareTo(r.uuid);
     }
 }
