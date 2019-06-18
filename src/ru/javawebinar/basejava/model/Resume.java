@@ -15,7 +15,6 @@ public class Resume implements Comparable<Resume> {
     private final String uuid;
     //TODO: Better to wrap this field into separate Class: FullName
     private final String fullName;
-
     private Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
     private Map<SectionType, Section> sections = new EnumMap<>(SectionType.class);
 
@@ -24,16 +23,11 @@ public class Resume implements Comparable<Resume> {
     }
 
     public Resume(String uuid, String fullName) {
-        //after watching HW#06
         requireNonNull(uuid, "UUID must not be null");
         requireNonNull(fullName, "FullName must not be NULL");
 
         this.uuid = uuid;
         this.fullName = fullName;
-    }
-
-    public void setContacts(Map<ContactType, String> contacts) {
-        this.contacts = contacts;
     }
 
     public void addContact(ContactType contactType, String contact) {

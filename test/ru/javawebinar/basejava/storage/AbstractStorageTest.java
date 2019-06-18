@@ -21,9 +21,9 @@ public abstract class AbstractStorageTest {
     private static final String UUID3 = "uuid3";
     private static final String UUID_NEW = "uuid_new";
 
-    private static Resume RESUME_UUID1 = new Resume(UUID1, "abcd");
-    private static Resume RESUME_UUID2 = new Resume(UUID2, "bbd");
-    private static Resume RESUME_UUID3 = new Resume(UUID3, "bcd");
+    private static Resume RESUME1 = new Resume(UUID1, "abcd");
+    private static Resume RESUME2 = new Resume(UUID2, "bbd");
+    private static Resume RESUME3 = new Resume(UUID3, "bcd");
     static Resume RESUME_NEW = new Resume(UUID_NEW, UUID_NEW);
 
     protected AbstractStorageTest(Storage storage) {
@@ -33,9 +33,9 @@ public abstract class AbstractStorageTest {
     @Before
     public void setUp() {
         storage.clear();
-        storage.save(RESUME_UUID3);
-        storage.save(RESUME_UUID2);
-        storage.save(RESUME_UUID1);
+        storage.save(RESUME3);
+        storage.save(RESUME2);
+        storage.save(RESUME1);
     }
 
     @After
@@ -45,9 +45,9 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void get() {
-        assertEquals(RESUME_UUID1, storage.get(UUID1));
-        assertEquals(RESUME_UUID2, storage.get(UUID2));
-        assertEquals(RESUME_UUID3, storage.get(UUID3));
+        assertEquals(RESUME1, storage.get(UUID1));
+        assertEquals(RESUME2, storage.get(UUID2));
+        assertEquals(RESUME3, storage.get(UUID3));
     }
 
     @Test(expected = NotExistStorageException.class)
@@ -71,7 +71,7 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void getAllSorted() {
-        List<Resume> expectedArray = asList(RESUME_UUID1, RESUME_UUID2, RESUME_UUID3);
+        List<Resume> expectedArray = asList(RESUME1, RESUME2, RESUME3);
         List<Resume> actualArray = storage.getAllSorted();
         assertNotNull(actualArray);
         assertThat(actualArray, is(expectedArray));
@@ -103,7 +103,7 @@ public abstract class AbstractStorageTest {
 
     @Test(expected = ExistStorageException.class)
     public void saveExisting() {
-        storage.save(RESUME_UUID2);
+        storage.save(RESUME2);
     }
 
     @Test(expected = NotExistStorageException.class)

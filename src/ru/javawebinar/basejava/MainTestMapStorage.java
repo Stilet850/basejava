@@ -3,16 +3,8 @@ package ru.javawebinar.basejava;
 import ru.javawebinar.basejava.exception.NotExistStorageException;
 import ru.javawebinar.basejava.model.ContactType;
 import ru.javawebinar.basejava.model.Resume;
-import ru.javawebinar.basejava.model.SectionType;
-import ru.javawebinar.basejava.model.content.*;
 import ru.javawebinar.basejava.storage.MapStorage;
 import ru.javawebinar.basejava.storage.Storage;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static java.time.LocalDate.now;
-import static java.time.LocalDate.of;
 
 /**
  * Test for your ArrayStorage implementation
@@ -65,11 +57,11 @@ class MainTestMapStorage {
             resume.addContact(ContactType.GITHUB, "https://github.com/gkislin");
             resume.addContact(ContactType.STACKOVERFLOW, "https://stackoverflow.com/users/548473/gkislin");
             resume.addContact(ContactType.HOME_PAGE, "http://gkislin.ru/");
-
-            Section jobPosition = new OneLineSection(new OneLineContent("Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям"));
+/*
+            Section jobPosition = new TextSection(new OneLineContent("Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям"));
             resume.addSection(SectionType.OBJECTIVE, jobPosition);
 
-            Section personalQuality = new OneLineSection(new OneLineContent("Аналитический склад ума, сильная логика, креативность, инициативность. Пурист кода и архитектуры. "));
+            Section personalQuality = new TextSection(new OneLineContent("Аналитический склад ума, сильная логика, креативность, инициативность. Пурист кода и архитектуры. "));
             resume.addSection(SectionType.PERSONAL, personalQuality);
             //achievement
             List<Content> achievementList = new ArrayList<>();
@@ -80,7 +72,7 @@ class MainTestMapStorage {
             achievementList.add(new OneLineContent("Создание JavaEE фреймворка для отказоустойчивого взаимодействия слабо-связанных сервисов (SOA-base архитектура, JAX-WS, JMS, AS Glassfish). Сбор статистики сервисов и информации о состоянии через систему мониторинга Nagios. Реализация онлайн клиента для администрирования и мониторинга системы по JMX (Jython/ Django). "));
             achievementList.add(new OneLineContent("Реализация протоколов по приему платежей всех основных платежных системы России (Cyberplat, Eport, Chronopay, Сбербанк), Белоруcсии(Erip, Osmp) и Никарагуа."));
 
-            resume.addSection(SectionType.ACHIEVEMENT, new MultiLineSection(achievementList));
+            resume.addSection(SectionType.ACHIEVEMENT, new ListSection(achievementList));
             //qualifications
             List<Content> qualificationsList = new ArrayList();
 
@@ -92,13 +84,13 @@ class MainTestMapStorage {
                     "Java Frameworks: Java 8 (Time API, Streams), Guava, Java Executor, MyBatis, Spring (MVC, Security, Data, Clouds, Boot), JPA (Hibernate, EclipseLink), Guice, GWT(SmartGWT, ExtGWT/GXT), Vaadin, Jasperreports, Apache Commons, Eclipse SWT, JUnit, Selenium (htmlelements).   "));
             qualificationsList.add(new OneLineContent("Python: Django"));
 
-            resume.addSection(SectionType.QUALIFICATIONS, new MultiLineSection(qualificationsList));
+            resume.addSection(SectionType.QUALIFICATIONS, new ListSection(qualificationsList));
             //experience
             List<Content> experienceList = new ArrayList<>();
             experienceList.add(new JobContent("Java Online Projects","javaops.ru", of(2013, 10, 1), now(), "Создание, организация и проведение Java онлайн проектов и стажировок.", "Автор проекта."));
             experienceList.add(new JobContent("Wrike","https://www.wrike.com/", of(2014, 10, 1), of(2016, 1, 1), "Проектирование и разработка онлайн платформы управления проектами Wrike (Java 8 API, Maven, Spring, MyBatis, Guava, Vaadin, PostgreSQL, Redis). Двухфакторная аутентификация, авторизация по OAuth1, OAuth2, JWT SSO.", "Старший разработчик (backend)"));
             experienceList.add(new JobContent("RIT Center",null, of(2012, 4, 1), of(2014, 10, 1), "Организация процесса разработки системы ERP для разных окружений: релизная политика, версионирование, ведение CI (Jenkins), миграция базы (кастомизация Flyway), конфигурирование системы (pgBoucer, Nginx), AAA via SSO. Архитектура БД и серверной части системы. Разработка интергационных сервисов: CMIS, BPMN2, 1C (WebServices), сервисов общего назначения (почта, экспорт в pdf, doc, html). Интеграция Alfresco JLAN для online редактирование из браузера документов MS Office. Maven + plugin development, Ant, Apache Commons, Spring security, Spring MVC, Tomcat,WSO2, xcmis, OpenCmis, Bonita, Python scripting, Unix shell remote scripting via ssh tunnels, PL/Python", " Java архитектор"));
-            Section experience = new MultiLineSection(experienceList);
+            Section experience = new ListSection(experienceList);
             resume.addSection(SectionType.EXPERIENCE, experience);
 
             //
@@ -107,8 +99,8 @@ class MainTestMapStorage {
             educationList.add(new EducationContent("Luxoft","www.luxoft-training.ru/training/catalog/course.html?ID=22366", of(2011, 3, 1), of(2011, 4, 1), "Курс \"Объектно-ориентированный анализ ИС. Концептуальное моделирование на UML.\""));
             educationList.add(new EducationContent("Заочная физико-техническая школа при МФТИ","http://www.school.mipt.ru/", of(1984, 9, 1), of(1987, 6, 1), "Закончил с отличием"));
 
-            Section education = new MultiLineSection(educationList);
-            resume.addSection(SectionType.EDUCATION, education);
+            Section education = new ListSection(educationList);
+            resume.addSection(SectionType.EDUCATION, education);*/
         }
     }
 }

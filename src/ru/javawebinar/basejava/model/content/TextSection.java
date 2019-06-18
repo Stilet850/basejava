@@ -4,21 +4,21 @@ import java.util.Objects;
 
 import static java.util.Objects.requireNonNull;
 
-public class OneLineContent implements Content {
+public class TextSection extends Section {
     private final String row;
 
-    public OneLineContent(String row) {
-        requireNonNull(row, "Row must not be null");
+    public TextSection(String row) {
+        requireNonNull(row, "row must not be null");
         this.row = row;
     }
 
-    public String getRow() {
+    public String getSection() {
         return row;
     }
 
     @Override
     public String toString() {
-        return "OneLineContent{" +
+        return "TextSection{" +
                 "row='" + row + '\'' +
                 '}';
     }
@@ -27,8 +27,8 @@ public class OneLineContent implements Content {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OneLineContent oneLine = (OneLineContent) o;
-        return row.equals(oneLine.row);
+        TextSection that = (TextSection) o;
+        return Objects.equals(row, that.row);
     }
 
     @Override
