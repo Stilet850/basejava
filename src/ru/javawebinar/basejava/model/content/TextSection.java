@@ -4,7 +4,9 @@ import java.util.Objects;
 
 import static java.util.Objects.requireNonNull;
 
-public class TextSection extends Section {
+public class TextSection extends Section{
+    private static final long serialVersionUID = 1L;
+
     private final String row;
 
     public TextSection(String row) {

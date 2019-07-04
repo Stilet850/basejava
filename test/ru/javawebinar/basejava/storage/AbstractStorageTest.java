@@ -8,6 +8,7 @@ import ru.javawebinar.basejava.exception.InvalidResumeException;
 import ru.javawebinar.basejava.exception.NotExistStorageException;
 import ru.javawebinar.basejava.model.Resume;
 
+import java.io.File;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -15,16 +16,18 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 public abstract class AbstractStorageTest {
+    protected final static File STORAGE_DIR = new File(".\\storage");
+
     protected final Storage storage;
     private static final String UUID1 = "uuid1";
     private static final String UUID2 = "uuid2";
     private static final String UUID3 = "uuid3";
     private static final String UUID_NEW = "uuid_new";
 
-    private static Resume RESUME1 = new Resume(UUID1, "abcd");
-    private static Resume RESUME2 = new Resume(UUID2, "bbd");
-    private static Resume RESUME3 = new Resume(UUID3, "bcd");
-    static Resume RESUME_NEW = new Resume(UUID_NEW, UUID_NEW);
+    private static Resume R1 = new Resume(UUID1, "abcd");
+    private static Resume R2 = new Resume(UUID2, "bbd");
+    private static Resume R3 = new Resume(UUID3, "bcd");
+    static Resume R_NEW = new Resume(UUID_NEW, UUID_NEW);
 
     protected AbstractStorageTest(Storage storage) {
         this.storage = storage;
@@ -33,9 +36,9 @@ public abstract class AbstractStorageTest {
     @Before
     public void setUp() {
         storage.clear();
-        storage.save(RESUME3);
-        storage.save(RESUME2);
-        storage.save(RESUME1);
+        storage.save(R3);
+        storage.save(R2);
+        storage.save(R1);
     }
 
     @After
@@ -45,9 +48,9 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void get() {
-        assertEquals(RESUME1, storage.get(UUID1));
-        assertEquals(RESUME2, storage.get(UUID2));
-        assertEquals(RESUME3, storage.get(UUID3));
+        assertEquals(R1, storage.get(UUID1));
+        assertEquals(R2, storage.get(UUID2));
+        assertEquals(R3, storage.get(UUID3));
     }
 
     @Test(expected = NotExistStorageException.class)
@@ -60,18 +63,18 @@ public abstract class AbstractStorageTest {
         Resume resume = new Resume(UUID2, UUID_NEW);
 
         storage.update(resume);
-        assertSame(resume, storage.get(UUID2));
+        assertEquals(resume, storage.get(UUID2));
         assertEquals(UUID_NEW, storage.get(UUID2).getFullName());
     }
 
     @Test(expected = NotExistStorageException.class)
     public void updateNotExist() {
-        storage.update(RESUME_NEW);
+        storage.update(R_NEW);
     }
 
     @Test
     public void getAllSorted() {
-        List<Resume> expectedArray = asList(RESUME1, RESUME2, RESUME3);
+        List<Resume> expectedArray = asList(R1, R2, R3);
         List<Resume> actualArray = storage.getAllSorted();
         assertNotNull(actualArray);
         assertThat(actualArray, is(expectedArray));
@@ -79,9 +82,9 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void save() {
-        storage.save(RESUME_NEW);
+        storage.save(R_NEW);
         assertEquals(4, storage.size());
-        assertEquals(RESUME_NEW, storage.get(UUID_NEW));
+        assertEquals(R_NEW, storage.get(UUID_NEW));
     }
 
     @Test(expected = InvalidResumeException.class)
@@ -103,7 +106,7 @@ public abstract class AbstractStorageTest {
 
     @Test(expected = ExistStorageException.class)
     public void saveExisting() {
-        storage.save(RESUME2);
+        storage.save(R2);
     }
 
     @Test(expected = NotExistStorageException.class)

@@ -25,6 +25,6 @@ public abstract class AbstractArrayStorageTest extends AbstractStorageTest {
             fail("Storage should not be filled. Please check storage capacity.");
         }
 
-        storage.save(RESUME_NEW);
+        storage.save(R_NEW);
     }
 }

@@ -2,6 +2,7 @@ package ru.javawebinar.basejava.model;
 
 import ru.javawebinar.basejava.model.content.Section;
 
+import java.io.Serializable;
 import java.util.*;
 
 import static java.util.Objects.hash;
@@ -10,7 +11,8 @@ import static java.util.Objects.requireNonNull;
 /**
  * Initial resume class
  */
-public class Resume implements Comparable<Resume> {
+public class Resume implements Comparable<Resume>, Serializable {
+    private static  final long serialVersionUID = 1L;
     // Unique identifier
     private final String uuid;
     //TODO: Better to wrap this field into separate Class: FullName

@@ -1,5 +1,6 @@
 package ru.javawebinar.basejava.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
@@ -11,7 +12,9 @@ import static java.util.Objects.requireNonNull;
 import static ru.javawebinar.basejava.util.DateUtil.NOW;
 import static ru.javawebinar.basejava.util.DateUtil.of;
 
-public class Organization {
+public class Organization  implements Serializable {
+
+    private static  final long serialVersionUID = 1L;
     private final Link link;
     private List<Position> positions = new ArrayList<>();
 

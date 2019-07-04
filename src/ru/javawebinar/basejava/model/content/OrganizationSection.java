@@ -2,17 +2,18 @@ package ru.javawebinar.basejava.model.content;
 
 import ru.javawebinar.basejava.model.Organization;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import static java.util.Arrays.asList;
 import static java.util.Objects.requireNonNull;
 
 public class OrganizationSection extends Section {
+    private static final long serialVersionUID = 1L;
     private List<Organization> organizations;
 
     public OrganizationSection(Organization ... organizations) {
-        this(Arrays.asList(organizations));
+        this(asList(organizations));
     }
 
     public OrganizationSection(List<Organization> organizations) {
