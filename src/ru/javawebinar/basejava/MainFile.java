@@ -14,7 +14,7 @@ public class MainFile {
             throw new RuntimeException("Error", e);
         }
 
-        File dir = new File("D:/Personal");
+        File dir = new File("./src/");
         System.out.println(dir.isDirectory());
         String [] list = dir.list();
         if(list!=null) {
@@ -31,19 +31,19 @@ public class MainFile {
 
         }
 
-        printDirectoryDeeply(new File(filePath));
+        printDirectoryDeeply(new File(filePath), "");
     }
 
-    public static void printDirectoryDeeply (File dir){
+    public static void printDirectoryDeeply (File dir, String offSet){
         File [] files = dir.listFiles();
 
         if(files != null){
             for (File fileTmp :files){
                 if(fileTmp.isFile()){
-                    System.out.println( "File:" + fileTmp.getName());
+                    System.out.println( offSet + "F:" + fileTmp.getName());
                 }else if(fileTmp.isDirectory()){
-                    System.out.println( "Directory:" + fileTmp.getName());
-                    printDirectoryDeeply(fileTmp);
+                    System.out.println( offSet + "D:" + fileTmp.getName());
+                    printDirectoryDeeply(fileTmp, offSet + "   ");
                 }
             }
         }

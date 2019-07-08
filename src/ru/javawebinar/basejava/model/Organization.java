@@ -18,11 +18,11 @@ public class Organization  implements Serializable {
     private final Link link;
     private List<Position> positions = new ArrayList<>();
 
-    Organization(String name, String url, Position... positions) {
+    public Organization(String name, String url, Position... positions) {
         this(new Link(name, url), asList(positions));
     }
 
-    Organization(Link homePage, List <Position> positions) {
+    public Organization(Link homePage, List <Position> positions) {
         this.link = homePage;
         this.positions = positions;
     }
