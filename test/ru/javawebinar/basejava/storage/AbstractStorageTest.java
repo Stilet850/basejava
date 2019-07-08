@@ -14,7 +14,6 @@ import java.util.List;
 import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
-import static ru.javawebinar.basejava.model.ResumeTestData.create;
 
 public abstract class AbstractStorageTest {
     protected final static File STORAGE_DIR = new File(".\\storage");
@@ -25,10 +24,10 @@ public abstract class AbstractStorageTest {
     private static final String UUID3 = "uuid3";
     private static final String UUID_NEW = "uuid_new";
 
-    private static Resume R1 = create(UUID1, "abcd");
-    private static Resume R2 = create(UUID2, "bbd");
-    private static Resume R3 = create(UUID3, "bcd");
-    static Resume R_NEW = create(UUID_NEW, UUID_NEW);
+    private static Resume R1 = new Resume(UUID1, "abcd");
+    private static Resume R2 = new Resume(UUID2, "bbd");
+    private static Resume R3 = new Resume(UUID3, "bcd");
+    static Resume R_NEW = new Resume(UUID_NEW, UUID_NEW);
 
     protected AbstractStorageTest(Storage storage) {
         this.storage = storage;
