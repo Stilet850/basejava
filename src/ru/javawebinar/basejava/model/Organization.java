@@ -1,5 +1,10 @@
 package ru.javawebinar.basejava.model;
 
+import ru.javawebinar.basejava.util.LocalDateAdapter;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
@@ -12,11 +17,15 @@ import static java.util.Objects.requireNonNull;
 import static ru.javawebinar.basejava.util.DateUtil.NOW;
 import static ru.javawebinar.basejava.util.DateUtil.of;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Organization  implements Serializable {
 
     private static  final long serialVersionUID = 1L;
-    private final Link link;
+    private Link link;
     private List<Position> positions = new ArrayList<>();
+
+    public Organization() {
+    }
 
     public Organization(String name, String url, Position... positions) {
         this(new Link(name, url), asList(positions));
@@ -49,11 +58,17 @@ public class Organization  implements Serializable {
         return Objects.hash(link, positions);
     }
 
-    public static class Position {
-        private final String title;
-        private final String description;
-        private final LocalDate startDate;
-        private final LocalDate endDate;
+    @XmlAccessorType(XmlAccessType.FIELD)
+    public static class Position implements Serializable {
+        private String title;
+        private String description;
+        @XmlJavaTypeAdapter(LocalDateAdapter.class)
+        private LocalDate startDate;
+        @XmlJavaTypeAdapter(LocalDateAdapter.class)
+        private LocalDate endDate;
+
+        public Position() {
+        }
 
         public Position(int startYear, Month startMonth, String title, String description) {
             this(of(startYear, startMonth), NOW, title, description);
@@ -87,16 +102,6 @@ public class Organization  implements Serializable {
 
         public LocalDate getEndDate() {
             return endDate;
-        }
-
-        @Override
-        public String toString() {
-            return "Position{" +
-                    "title='" + title + '\'' +
-                    ", description='" + description + '\'' +
-                    ", startDate=" + startDate +
-                    ", endDate=" + endDate +
-                    '}';
         }
 
         @Override

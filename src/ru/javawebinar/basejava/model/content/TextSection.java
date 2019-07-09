@@ -1,13 +1,19 @@
 package ru.javawebinar.basejava.model.content;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.util.Objects;
 
 import static java.util.Objects.requireNonNull;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class TextSection extends Section{
     private static final long serialVersionUID = 1L;
 
-    private final String row;
+    private String row;
+
+    public TextSection() {
+    }
 
     public TextSection(String row) {
         requireNonNull(row, "row must not be null");
