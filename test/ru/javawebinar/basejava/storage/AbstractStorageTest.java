@@ -1,6 +1,5 @@
 package ru.javawebinar.basejava.storage;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import ru.javawebinar.basejava.exception.ExistStorageException;
@@ -17,7 +16,7 @@ import static org.junit.Assert.*;
 import static ru.javawebinar.basejava.model.ResumeTestData.create;
 
 public abstract class AbstractStorageTest {
-    protected final static File STORAGE_DIR = new File("D:\\storage");
+    protected final static File STORAGE_DIR = new File(".\\storage");
 
     protected final Storage storage;
     private static final String UUID1 = "uuid1";
@@ -25,9 +24,6 @@ public abstract class AbstractStorageTest {
     private static final String UUID3 = "uuid3";
     private static final String UUID_NEW = "uuid_new";
 
-//    private static Resume R1 = new Resume(UUID1, "abcd");
-//    private static Resume R2 = new Resume(UUID2, "bbd");
-//    private static Resume R3 = new Resume(UUID3, "bcd");
     private static Resume R1 = create(UUID1, "abcd");
     private static Resume R2 = create(UUID2, "bbd");
     private static Resume R3 = create(UUID3, "bcd");
@@ -45,10 +41,10 @@ public abstract class AbstractStorageTest {
         storage.save(R1);
     }
 
-    @After
-    public void doClean() {
-        storage.clear();
-    }
+//    @After
+//    public void doClean() {
+//        storage.clear();
+//    }
 
     @Test
     public void get() {
