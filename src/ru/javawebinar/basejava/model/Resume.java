@@ -20,6 +20,7 @@ import static java.util.Objects.requireNonNull;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Resume implements Comparable<Resume>, Serializable {
     private static  final long serialVersionUID = 1L;
+
     // Unique identifier
     private String uuid;
     private String fullName;
@@ -47,6 +48,14 @@ public class Resume implements Comparable<Resume>, Serializable {
 
     public void addSection(SectionType contactType, Section section) {
         sections.put(contactType, section);
+    }
+
+    public Map<ContactType, String> getContacts() {
+        return contacts;
+    }
+
+    public Map<SectionType, Section> getSections() {
+        return sections;
     }
 
     public Section getSection(SectionType sectionType){
