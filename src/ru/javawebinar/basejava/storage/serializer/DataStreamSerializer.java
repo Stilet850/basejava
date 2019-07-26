@@ -17,8 +17,13 @@ public class DataStreamSerializer implements StreamSerializer {
                 dos.writeUTF(entry.getKey().name());
                 dos.writeUTF(entry.getValue());
             }
-            //TODO implement section
-        }
+
+//            dos.writeInt(r.getSections().size());
+//            for (Map.Entry<SectionType, Section> entry : r.getSections().entrySet()) {
+//                dos.writeUTF(entry.getKey().name());
+//                dos.writeUTF(entry.getValue().toString());
+//            }
+         }
     }
 
     @Override
@@ -29,6 +34,11 @@ public class DataStreamSerializer implements StreamSerializer {
             for (int i = 0; i < size ; i++){
                 resume.addContact(ContactType.valueOf(dis.readUTF()), dis.readUTF());
             }
+//            size = dis.readInt();
+//            for (int i = 0; i < size ; i++){
+//                resume.addSection(SectionType.valueOf(dis.readUTF()), dis.readUTF());
+//            }
+
             return resume;
             //TODO implement section
         }
