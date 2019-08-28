@@ -10,24 +10,24 @@ import static java.util.Objects.requireNonNull;
 public class TextSection extends Section{
     private static final long serialVersionUID = 1L;
 
-    private String row;
+    private String content;
 
     public TextSection() {
     }
 
-    public TextSection(String row) {
-        requireNonNull(row, "row must not be null");
-        this.row = row;
+    public TextSection(String content) {
+        requireNonNull(content, "content must not be null");
+        this.content = content;
     }
 
-    public String getSection() {
-        return row;
+    public String getContent() {
+        return content;
     }
 
     @Override
     public String toString() {
         return "TextSection{" +
-                "row='" + row + '\'' +
+                "content='" + content + '\'' +
                 '}';
     }
 
@@ -36,11 +36,11 @@ public class TextSection extends Section{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TextSection that = (TextSection) o;
-        return Objects.equals(row, that.row);
+        return Objects.equals(content, that.content);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(row);
+        return Objects.hash(content);
     }
 }

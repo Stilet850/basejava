@@ -36,6 +36,14 @@ public class Organization  implements Serializable {
         this.positions = positions;
     }
 
+    public List<Position> getPositions() {
+        return positions;
+    }
+
+    public Link getLink() {
+        return link;
+    }
+
     @Override
     public String toString() {
         return "Organization(" +
