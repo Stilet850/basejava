@@ -10,6 +10,7 @@ import ru.javawebinar.basejava.util.Config;
 
 import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;
@@ -21,10 +22,15 @@ public abstract class AbstractStorageTest {
 
 
     protected final Storage storage;
-    private static final String UUID1 = "uuid1";
-    private static final String UUID2 = "uuid2";
-    private static final String UUID3 = "uuid3";
-    private static final String UUID_NEW = "uuid_new";
+//    private static final String UUID1 = "uuid1";
+//    private static final String UUID2 = "uuid2";
+//    private static final String UUID3 = "uuid3";
+//    private static final String UUID_NEW = "uuid_new";
+
+    private static final String UUID1 = UUID.randomUUID().toString();
+    private static final String UUID2 = UUID.randomUUID().toString();
+    private static final String UUID3 = UUID.randomUUID().toString();
+    private static final String UUID_NEW = UUID.randomUUID().toString();
 
     private static Resume R1 = create(UUID1, "abcd");
     private static Resume R2 = create(UUID2, "bbd");
