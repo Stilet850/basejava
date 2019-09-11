@@ -7,10 +7,7 @@ import ru.javawebinar.basejava.model.Resume;
 import ru.javawebinar.basejava.sql.SqlHelper;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class SqlStorage implements Storage {
 
@@ -105,7 +102,7 @@ public class SqlStorage implements Storage {
                 "on r.uuid=c.resume_uuid " +
                 "ORDER BY r.full_name, uuid ", ps -> {
             ResultSet rs = ps.executeQuery();
-            Map<String, Resume> resumesMap = new HashMap<>();
+            Map<String, Resume> resumesMap = new LinkedHashMap<>();
             while (rs.next()) {
                 String uuid = rs.getString("uuid");
                 Resume resume = resumesMap.get(uuid);
@@ -129,7 +126,10 @@ public class SqlStorage implements Storage {
     }
 
     private void addContact(ResultSet rs, Resume resume) throws SQLException {
-        resume.addContact(ContactType.valueOf(rs.getString("type")), rs.getString("value"));
+        String value = rs.getString("value");
+        if (value != null) {
+            resume.addContact(ContactType.valueOf(rs.getString("type")), value);
+        }
     }
 
     private void insertContact(Connection connection, Resume resume) throws SQLException {
