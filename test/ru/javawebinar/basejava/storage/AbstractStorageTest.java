@@ -34,7 +34,7 @@ public abstract class AbstractStorageTest {
 
     private static Resume R1 = create(UUID1, "abcd");
     private static Resume R2 = create(UUID2, "bbd");
-    private static Resume R3 = create(UUID3, "bcd");
+    private static Resume R3 = create(UUID3, "ccd");
     static Resume R_NEW = create(UUID_NEW, UUID_NEW);
 
     protected AbstractStorageTest(Storage storage) {
