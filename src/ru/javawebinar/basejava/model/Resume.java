@@ -19,7 +19,7 @@ import static java.util.Objects.requireNonNull;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Resume implements Comparable<Resume>, Serializable {
-    private static  final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     // Unique identifier
     private String uuid;
@@ -42,6 +42,10 @@ public class Resume implements Comparable<Resume>, Serializable {
         this.fullName = fullName;
     }
 
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
     public void addContact(ContactType contactType, String contact) {
         contacts.put(contactType, contact);
     }
@@ -58,11 +62,11 @@ public class Resume implements Comparable<Resume>, Serializable {
         return sections;
     }
 
-    public Section getSection(SectionType sectionType){
+    public Section getSection(SectionType sectionType) {
         return sections.get(sectionType);
     }
 
-    public String getContact(ContactType contactType){
+    public String getContact(ContactType contactType) {
         return contacts.get(contactType);
     }
 
@@ -103,6 +107,6 @@ public class Resume implements Comparable<Resume>, Serializable {
     @Override
     public int compareTo(Resume r) {
         int comparisonResultByFullName = fullName.compareTo(r.fullName);
-                return comparisonResultByFullName != 0 ? comparisonResultByFullName : uuid.compareTo(r.uuid);
+        return comparisonResultByFullName != 0 ? comparisonResultByFullName : uuid.compareTo(r.uuid);
     }
 }
