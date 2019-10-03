@@ -8,6 +8,7 @@ import static java.util.Objects.requireNonNull;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class TextSection extends Section{
+    public static final Section EMPTY = new TextSection("");
     private static final long serialVersionUID = 1L;
 
     private String content;

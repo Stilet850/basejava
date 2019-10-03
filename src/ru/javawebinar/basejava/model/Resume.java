@@ -1,6 +1,9 @@
 package ru.javawebinar.basejava.model;
 
+import ru.javawebinar.basejava.model.content.ListSection;
+import ru.javawebinar.basejava.model.content.OrganizationSection;
 import ru.javawebinar.basejava.model.content.Section;
+import ru.javawebinar.basejava.model.content.TextSection;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -20,6 +23,16 @@ import static java.util.Objects.requireNonNull;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Resume implements Comparable<Resume>, Serializable {
     private static final long serialVersionUID = 1L;
+    public static final Resume EMPTY = new Resume();
+    static {
+        EMPTY.setSection(SectionType.OBJECTIVE, TextSection.EMPTY);
+        EMPTY.setSection(SectionType.PERSONAL, TextSection.EMPTY);
+        EMPTY.setSection(SectionType.ACHIEVEMENT, ListSection.EMPTY);
+        EMPTY.setSection(SectionType.QUALIFICATIONS, ListSection.EMPTY);
+        EMPTY.setSection(SectionType.EXPERIENCE, new OrganizationSection(Organization.EMPTY));
+        EMPTY.setSection(SectionType.EDUCATION, new OrganizationSection(Organization.EMPTY));
+    }
+
 
     // Unique identifier
     private String uuid;
@@ -46,11 +59,11 @@ public class Resume implements Comparable<Resume>, Serializable {
         this.fullName = fullName;
     }
 
-    public void addContact(ContactType contactType, String contact) {
+    public void setContact(ContactType contactType, String contact) {
         contacts.put(contactType, contact);
     }
 
-    public void addSection(SectionType contactType, Section section) {
+    public void setSection(SectionType contactType, Section section) {
         sections.put(contactType, section);
     }
 
@@ -109,4 +122,5 @@ public class Resume implements Comparable<Resume>, Serializable {
         int comparisonResultByFullName = fullName.compareTo(r.fullName);
         return comparisonResultByFullName != 0 ? comparisonResultByFullName : uuid.compareTo(r.uuid);
     }
+
 }

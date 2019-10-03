@@ -12,6 +12,7 @@ import static java.util.Objects.requireNonNull;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ListSection extends Section {
     private static final long serialVersionUID = 2L;
+    public static final Section EMPTY = new ListSection("");
 
     private List<String> items;
 
